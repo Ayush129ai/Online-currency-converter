@@ -1,0 +1,22 @@
+{
+  "name": "global-finance-currency-converter",
+  "version": "1.0.0",
+  "description": "A professional currency converter with backend API",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["currency", "converter", "finance", "api"],
+  "author": "Global Finance Corp",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
