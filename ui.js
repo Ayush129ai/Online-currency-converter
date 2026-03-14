@@ -38,9 +38,9 @@ export function updateRateDisplay(from, to) {
     }
 }
 
-export function displayResult(amount, from, to) {
+export async function displayResult(amount, from, to) {
     try {
-        const converted = convertCurrency(amount, from, to);
+        const converted = await convertCurrency(amount, from, to);
         document.getElementById('result').textContent = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
     } catch (error) {
         document.getElementById('result').textContent = 'Error: ' + error.message;

@@ -13,7 +13,7 @@ async function init() {
     }
 }
 
-document.getElementById('converter-form').addEventListener('submit', function(e) {
+document.getElementById('converter-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const amount = parseFloat(document.getElementById('amount').value);
     const from = document.getElementById('from-currency').value;
@@ -24,7 +24,7 @@ document.getElementById('converter-form').addEventListener('submit', function(e)
         return;
     }
 
-    displayResult(amount, from, to);
+    await displayResult(amount, from, to);
 });
 
 document.getElementById('swap-btn').addEventListener('click', () => {
