@@ -11,6 +11,13 @@ A professional web-based currency converter application built for Global Finance
 - Responsive design suitable for desktop and mobile
 - Modular JavaScript architecture for maintainability
 - Backend caching for improved performance
+- Environment-driven API base URL configuration
+- API abuse protection with rate limiting
+- Schema-based request validation with clear error messages
+- Jest unit tests for frontend conversion logic
+- Supertest integration tests for backend endpoints
+- Sentry runtime error tracking support
+- Pino structured logging
 
 ## Architecture
 
@@ -26,6 +33,11 @@ A professional web-based currency converter application built for Global Finance
 - CORS enabled for frontend communication
 - RESTful API endpoints
 - Error handling and fallback mechanisms
+- dotenv-based environment variable loading
+- express-rate-limit for API protection
+- Zod validation for robust query parsing
+- Sentry error telemetry support
+- Pino structured application logs
 
 ## API Endpoints
 
@@ -89,19 +101,31 @@ Health check endpoint with cache status.
    npm install
    ```
 
-2. **Start the backend server:**
+2. **Create environment file:**
+   ```bash
+   copy .env.example .env
+   ```
+   Then edit `.env` and provide a valid `EXCHANGE_RATE_API_KEY`.
+
+3. **Start the backend server:**
    ```bash
    npm start
    ```
    Server runs on http://localhost:3000
 
-3. **Open the frontend:**
+4. **Open the frontend:**
    Open http://localhost:3000 in your browser (served by the backend)
 
 ### Development
 For development with auto-restart:
 ```bash
 npm run dev
+```
+
+### Testing
+Run all unit and integration tests:
+```bash
+npm test
 ```
 
 ## Project Structure
@@ -129,6 +153,12 @@ npm run dev
 - Express.js
 - node-fetch for HTTP requests
 - CORS for cross-origin requests
+- dotenv for environment variable management
+- express-rate-limit for request throttling
+- Zod for schema validation
+- Jest and Supertest for automated testing
+- Sentry for runtime error monitoring
+- Pino for structured JSON logging
 
 ## Browser Support
 
@@ -136,9 +166,18 @@ Works in all modern browsers that support ES6 modules and Fetch API.
 
 ## External API
 
-Uses the free ExchangeRate API: https://api.exchangerate-api.com/
+Uses ExchangeRate API (v6): https://www.exchangerate-api.com/
 
-- No API key required for basic usage
+- API key required (provided via `EXCHANGE_RATE_API_KEY` in `.env`)
 - Rates are quoted against USD
 - Updates approximately every hour
 - Supports 160+ currencies
+
+## Environment Variables
+
+- `API_BASE_URL`: Base URL used by the frontend for backend API calls (for example `http://localhost:3000`)
+- `EXCHANGE_RATE_API_KEY`: API key used by the backend to fetch exchange rates
+- `PORT`: Port used by Express server (defaults to 3000)
+- `SENTRY_DSN`: Optional DSN to enable Sentry error reporting
+- `SENTRY_TRACES_SAMPLE_RATE`: Trace sampling ratio for Sentry performance telemetry
+- `LOG_LEVEL`: Pino log level (for example `info`, `warn`, `error`, `debug`)

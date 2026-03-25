@@ -32,10 +32,43 @@
                     </select>
                 </div>
             </div>
+
+            <section class="bank-margin-panel" aria-labelledby="bank-margin-title">
+                <h3 id="bank-margin-title">Bank Margin Simulator</h3>
+                <div class="bank-margin-grid">
+                    <div class="input-group bank-margin-toggle-group">
+                        <label for="bank-margin-enabled">Pricing Mode</label>
+                        <select id="bank-margin-enabled">
+                            <option value="off" selected>Interbank (Google Rate)</option>
+                            <option value="on">Simulate Point-of-Sale Bank Margin</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="bank-margin-preset">Bank Margin</label>
+                        <select id="bank-margin-preset">
+                            <option value="1">1%</option>
+                            <option value="1.5">1.5%</option>
+                            <option value="3">3%</option>
+                            <option value="custom">Custom Fee</option>
+                        </select>
+                    </div>
+                    <div class="input-group hidden" id="bank-margin-custom-wrap">
+                        <label for="bank-margin-custom">Custom Foreign Transaction Fee (%)</label>
+                        <input type="number" id="bank-margin-custom" min="0" max="25" step="0.01" value="2.00">
+                    </div>
+                </div>
+            </section>
+
             <button type="submit" class="convert-btn">Convert</button>
         </form>
         <div id="rate-display" class="rate-display"></div>
         <div id="result" class="result"></div>
+        <div class="bank-difference-card" id="bank-difference-card">
+            <p id="bank-fee-status" class="bank-fee-status">Status: Waiting for conversion</p>
+            <p id="bank-google-total" class="bank-line">Google Rate Total: -</p>
+            <p id="bank-actual-total" class="bank-line">Actual POS Total: -</p>
+            <p id="bank-difference" class="bank-line bank-difference">Extra Cost Due To Margin: -</p>
+        </div>
         <div class="additional-features">
             <button id="add-favorite" class="feature-btn">Add to Favorites</button>
             <div id="favorites" class="favorites">
@@ -43,10 +76,196 @@
                 <ul id="favorites-list"></ul>
             </div>
         </div>
+
+        <section class="task-panel" aria-labelledby="task-panel-title">
+            <h2 id="task-panel-title">Smart Task Management</h2>
+            <form id="task-form" class="task-form">
+                <div class="task-grid">
+                    <div class="input-group">
+                        <label for="task-title">Task</label>
+                        <input type="text" id="task-title" placeholder="e.g. Prepare quarterly report" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="task-due-date">Due Date</label>
+                        <input type="date" id="task-due-date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="task-priority">Priority</label>
+                        <select id="task-priority" required>
+                            <option value="high">High</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="task-dependency">Blocked By</label>
+                        <select id="task-dependency">
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="feature-btn">Add Task</button>
+            </form>
+            <p id="task-message" class="helper-text" aria-live="polite"></p>
+            <div id="task-list" class="task-list" aria-live="polite"></div>
+            <div class="task-dependency-map">
+                <h3>Dependency Map</h3>
+                <ul id="task-dependency-list" class="dependency-list"></ul>
+            </div>
+        </section>
+
+        <section class="ocr-panel" aria-labelledby="ocr-panel-title">
+            <h2 id="ocr-panel-title">OCR Camera Price Scanner</h2>
+            <p class="helper-text">Point your camera at a price tag to detect and convert in near real time.</p>
+
+            <div class="ocr-controls">
+                <button type="button" id="ocr-toggle-btn" class="feature-btn">Start Scanner</button>
+                <button type="button" id="ocr-flash-btn" class="task-expand-btn" disabled>Flash: Off</button>
+                <button type="button" id="ocr-freeze-btn" class="task-expand-btn" disabled>Freeze Frame</button>
+                <div class="input-group ocr-target-group">
+                    <label for="ocr-base-currency">Convert To</label>
+                    <select id="ocr-base-currency"></select>
+                </div>
+                <div class="input-group ocr-threshold-group">
+                    <label for="ocr-confidence-threshold">Confidence Threshold: <span id="ocr-threshold-value">60</span>%</label>
+                    <input type="range" id="ocr-confidence-threshold" min="10" max="95" step="1" value="60">
+                </div>
+            </div>
+
+            <div class="ocr-preview" id="ocr-preview">
+                <video id="ocr-video" class="ocr-video" autoplay playsinline muted></video>
+                <img id="ocr-frozen-frame" class="ocr-frozen-frame hidden" alt="Frozen scanner frame">
+                <div id="ocr-overlay" class="ocr-overlay" aria-live="polite"></div>
+            </div>
+
+            <p id="ocr-status" class="helper-text" aria-live="polite">Scanner idle.</p>
+            <div id="ocr-last-result" class="ocr-last-result"></div>
+        </section>
+
+        <section class="tip-panel" aria-labelledby="tip-panel-title">
+            <h2 id="tip-panel-title">Smart Tip & Local Etiquette Guide</h2>
+            <p class="helper-text">Get a culturally-aware tip suggestion and see totals in local and home currency.</p>
+
+            <div class="tip-grid">
+                <div class="input-group">
+                    <label for="tip-bill-amount">Bill Amount</label>
+                    <input type="number" id="tip-bill-amount" min="0" step="0.01" placeholder="e.g. 82.50">
+                </div>
+
+                <div class="input-group">
+                    <label for="tip-country">Country</label>
+                    <select id="tip-country"></select>
+                </div>
+
+                <div class="input-group">
+                    <label for="tip-home-currency">Home Currency</label>
+                    <select id="tip-home-currency"></select>
+                </div>
+            </div>
+
+            <div class="tip-actions">
+                <button type="button" id="tip-calc-btn" class="feature-btn">Calculate Smart Tip</button>
+                <button type="button" id="tip-gps-btn" class="task-expand-btn">Use My Location</button>
+            </div>
+
+            <p id="tip-status" class="helper-text" aria-live="polite">Tip calculator ready.</p>
+
+            <div class="tip-results">
+                <p id="tip-result-local" class="tip-result-line"></p>
+                <p id="tip-result-home" class="tip-result-line"></p>
+            </div>
+
+            <div class="tip-pro-tip-box">
+                <h3>Pro-Tip</h3>
+                <p id="tip-etiquette" class="tip-etiquette-text">Select a country to see local payment etiquette.</p>
+            </div>
+        </section>
+
+        <section class="trend-panel" aria-labelledby="trend-panel-title">
+            <h2 id="trend-panel-title">Historical Trend Visualizer</h2>
+            <p class="helper-text">Track exchange-rate movement over multiple time windows.</p>
+
+            <div class="trend-controls">
+                <div class="input-group">
+                    <label for="trend-from-currency">From</label>
+                    <select id="trend-from-currency"></select>
+                </div>
+                <div class="input-group">
+                    <label for="trend-to-currency">To</label>
+                    <select id="trend-to-currency"></select>
+                </div>
+            </div>
+
+            <div class="trend-intervals" role="group" aria-label="Historical interval">
+                <button type="button" class="task-expand-btn trend-interval-btn active" data-interval="24h">24h</button>
+                <button type="button" class="task-expand-btn trend-interval-btn" data-interval="7d">7d</button>
+                <button type="button" class="task-expand-btn trend-interval-btn" data-interval="1m">1m</button>
+                <button type="button" class="task-expand-btn trend-interval-btn" data-interval="1y">1y</button>
+            </div>
+
+            <p id="trend-status" class="helper-text" aria-live="polite">Trend visualizer ready.</p>
+
+            <div class="trend-chart-wrap">
+                <canvas id="trend-chart" aria-label="Historical exchange rate chart"></canvas>
+            </div>
+        </section>
+
+        <section class="alerts-panel" aria-labelledby="alerts-panel-title">
+            <h2 id="alerts-panel-title">Currency Alert System</h2>
+            <p class="helper-text">Create rate alerts and get notified when your target is crossed.</p>
+
+            <form id="alert-form" class="alert-form">
+                <div class="alert-grid">
+                    <div class="input-group">
+                        <label for="alert-user-id">User ID</label>
+                        <input type="text" id="alert-user-id" placeholder="e.g. user-123" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="alert-from-currency">From</label>
+                        <select id="alert-from-currency" required></select>
+                    </div>
+                    <div class="input-group">
+                        <label for="alert-to-currency">To</label>
+                        <select id="alert-to-currency" required></select>
+                    </div>
+                    <div class="input-group">
+                        <label for="alert-target-rate">Target Rate</label>
+                        <input type="number" id="alert-target-rate" min="0" step="0.000001" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="alert-direction">Direction</label>
+                        <select id="alert-direction" required>
+                            <option value="above">Above</option>
+                            <option value="below">Below</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="alert-cooldown">Cool-down (minutes)</label>
+                        <input type="number" id="alert-cooldown" min="1" max="1440" step="1" value="30" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="alert-fcm-token">FCM Token (Optional)</label>
+                    <input type="text" id="alert-fcm-token" placeholder="Paste Firebase token for push, or leave blank for local mode">
+                </div>
+
+                <div class="alerts-actions">
+                    <button type="submit" class="feature-btn">Create Alert</button>
+                    <button type="button" id="alerts-refresh-btn" class="task-expand-btn">Refresh Alerts</button>
+                </div>
+            </form>
+
+            <p id="alerts-status" class="helper-text" aria-live="polite">Alert manager ready.</p>
+            <div id="alerts-list" class="alerts-list"></div>
+        </section>
     </div>
     <footer>
         <p>&copy; 2026 Global Finance Corp. All rights reserved.</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="/app-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script type="module" src="main.js"></script>
 </body>
 </html>

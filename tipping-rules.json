@@ -1,0 +1,110 @@
+{
+  "version": "2026.1",
+  "defaultRule": {
+    "countryCode": "DEFAULT",
+    "countryName": "General",
+    "tipPercent": 10,
+    "currency": "USD",
+    "proTip": "A modest tip is usually appreciated when service is attentive."
+  },
+  "countries": [
+    {
+      "countryCode": "US",
+      "countryName": "United States",
+      "tipPercent": 20,
+      "currency": "USD",
+      "proTip": "Restaurant tipping is standard. Around 18-22% is common for table service."
+    },
+    {
+      "countryCode": "GB",
+      "countryName": "United Kingdom",
+      "tipPercent": 10,
+      "currency": "GBP",
+      "proTip": "A 10% tip is typical unless a service charge is already included on the bill."
+    },
+    {
+      "countryCode": "JP",
+      "countryName": "Japan",
+      "tipPercent": 0,
+      "currency": "JPY",
+      "proTip": "Tipping is not customary. Good service is included and extra cash may feel awkward."
+    },
+    {
+      "countryCode": "FR",
+      "countryName": "France",
+      "tipPercent": 5,
+      "currency": "EUR",
+      "proTip": "Service is often included. Small rounding up or a few euros for great service is common."
+    },
+    {
+      "countryCode": "DE",
+      "countryName": "Germany",
+      "tipPercent": 5,
+      "currency": "EUR",
+      "proTip": "Rounding up or leaving around 5-10% is common in restaurants."
+    },
+    {
+      "countryCode": "IT",
+      "countryName": "Italy",
+      "tipPercent": 5,
+      "currency": "EUR",
+      "proTip": "Coperto may be charged. Extra tipping is modest, often by rounding up."
+    },
+    {
+      "countryCode": "ES",
+      "countryName": "Spain",
+      "tipPercent": 5,
+      "currency": "EUR",
+      "proTip": "Tipping is optional; small change or rounding up is typical for good service."
+    },
+    {
+      "countryCode": "AE",
+      "countryName": "United Arab Emirates",
+      "tipPercent": 10,
+      "currency": "AED",
+      "proTip": "10% is common in restaurants if service charge is not included."
+    },
+    {
+      "countryCode": "IN",
+      "countryName": "India",
+      "tipPercent": 10,
+      "currency": "INR",
+      "proTip": "Around 5-10% is common for restaurants and delivery when service charge is absent."
+    },
+    {
+      "countryCode": "AU",
+      "countryName": "Australia",
+      "tipPercent": 0,
+      "currency": "AUD",
+      "proTip": "Tipping is optional. Many people round up or leave a small amount for excellent service."
+    },
+    {
+      "countryCode": "CA",
+      "countryName": "Canada",
+      "tipPercent": 15,
+      "currency": "CAD",
+      "proTip": "15-20% is typical for sit-down restaurant service."
+    },
+    {
+      "countryCode": "MX",
+      "countryName": "Mexico",
+      "tipPercent": 10,
+      "currency": "MXN",
+      "proTip": "10-15% is common in restaurants, especially in tourist areas."
+    },
+    {
+      "countryCode": "SG",
+      "countryName": "Singapore",
+      "tipPercent": 0,
+      "currency": "SGD",
+      "proTip": "Service charge is often included. Extra tipping is uncommon."
+    },
+    {
+      "countryCode": "BR",
+      "countryName": "Brazil",
+      "tipPercent": 10,
+      "currency": "BRL",
+      "proTip": "A 10% service fee is often included; extra is optional."
+    }
+  ]
+}
